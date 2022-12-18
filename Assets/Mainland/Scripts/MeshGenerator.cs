@@ -22,15 +22,24 @@ public class MeshGenerator : MonoBehaviour
     public float falloffEnd;
     public Vector2Int falloffSize;
 
+    public Material[] terrainTypes;
+
     Mesh mesh;
     Vector3[] vertices;
     int[] triangles;
+    Vector2[] uvs;
+    int biomeIdx;
+
+    [SerializeField] VegetationGenerator TreesGen;
 
     void Start()
     {
         mesh = new Mesh();
+        seed = (int)Random.Range(0f, 100000f);
         GetComponent<MeshFilter>().mesh = mesh;
-
+        biomeIdx = (int)Random.Range(0f, terrainTypes.Length);
+        GetComponent<MeshRenderer>().material = terrainTypes[biomeIdx] as Material;
+        GetComponent<MeshCollider>().sharedMesh = mesh;
         GenerateTerrain();
     }
 
@@ -38,6 +47,8 @@ public class MeshGenerator : MonoBehaviour
     {
         CreateShape();
         UpdateMesh();
+        GetComponent<MeshCollider>().sharedMesh = mesh;
+        GenerateVegetation();
     }
 
     void CreateShape()
@@ -78,6 +89,15 @@ public class MeshGenerator : MonoBehaviour
             vert++;
         }
 
+        uvs = new Vector2[vertices.Length];
+        for (int i = 0, z = 0; z <= mapHeight; z++)
+        {
+            for (int x = 0; x <= mapWidth; x++)
+            {
+                uvs[i] = new Vector2((float)x / mapWidth, (float)z / mapHeight);
+                i++;
+            }
+        }
     }
 
     void UpdateMesh()
@@ -85,9 +105,15 @@ public class MeshGenerator : MonoBehaviour
         mesh.Clear();
         mesh.vertices = vertices;
         mesh.triangles = triangles;
-
+        mesh.uv = uvs;
         mesh.RecalculateNormals();
         mesh.RecalculateTangents();
+        
+    }
+
+    void GenerateVegetation()
+    {
+        TreesGen.GenerateFromPrefab(biomeIdx);
     }
 
     void OnValidate()

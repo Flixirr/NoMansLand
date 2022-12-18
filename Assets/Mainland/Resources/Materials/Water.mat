@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 4
+  version: 5
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Water
   m_Shader: {fileID: -6465566751694194690, guid: d5771ed6cb3ea7345bcce27eb0295cab, type: 3}
-  m_ShaderKeywords: 
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -88,10 +89,11 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - Vector1_1a62204940b843cf80b2857a68e7ce92: 2
     - Vector1_3b175b7ca60d4be291e1ca65f75ad79d: 4
-    - Vector1_3cc9ce6ff4634efc8d1ef9123d3800cb: 10
+    - Vector1_3cc9ce6ff4634efc8d1ef9123d3800cb: 2
     - Vector1_50a62398339b40d39ef8743ef83d1e1e: 1
     - Vector1_56c41b7a333a46c3a2738c587a7adeac: 1
     - Vector1_6953ee0cbb974a9c8687c5cd32e5733e: 0
@@ -119,6 +121,7 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
